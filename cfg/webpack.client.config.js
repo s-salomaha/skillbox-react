@@ -29,10 +29,28 @@ module.exports = {
     publicPath: '/static/'
   },
   module: {
-    rules: [{
-      test: /\.[tj]sx?$/,
-      use: ['ts-loader']
-    }]
+    rules: [
+      {
+        test: /\.[tj]sx?$/,
+        use: ['ts-loader']
+      },
+      {
+        test: /\.s[ac]ss$/,
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              modules: {
+                mode: 'local',
+                localIdentName: '[name]__[local]--[hash:base64:5]'
+              }
+            }
+          },
+          'sass-loader'
+        ]
+      }
+    ]
   },
   devtool: setupDevtool(),
   plugins: IS_DEV

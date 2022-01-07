@@ -20,8 +20,11 @@
   "devDependencies": {
     "@hot-loader/react-dom": "^17.0.1",
     "@types/jest": "^27.0.3",
+    "@types/react": "^17.0.38",
+    "@types/react-dom": "^17.0.11",
     "clean-webpack-plugin": "^4.0.0",
     "css-loader": "^3.4.2",
+    "generator-react-ts-component-dir": "^1.0.0",
     "html-webpack-plugin": "^4.5.2",
     "jest": "^27.4.5",
     "react-hot-loader": "^4.13.0",
@@ -36,6 +39,7 @@
     "webpack-dev-middleware": "^5.3.0",
     "webpack-dev-server": "^3.10.3",
     "webpack-hot-middleware": "^2.25.1",
-    "webpack-node-externals": "^3.0.0"
+    "webpack-node-externals": "^3.0.0",
+    "yo": "^4.3.0"
   }
 }

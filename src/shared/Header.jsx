@@ -1,12 +1,13 @@
 import { hot } from 'react-hot-loader/root';
 import * as React from 'react';
-import styles from './header.scss';
-import {StarWarsNameClass} from "./StateExamples/StarWarsNameClass/StarWarsNameClass";
+// import styles from './header.scss';
+// import {StarWarsNameClass} from "./StateExamples/StarWarsNameClass/StarWarsNameClass";
+import { StarWarsNameFunction } from './StateExamples/StarWarsNameFunction/StarWarsNameFunction';
 
 function HeaderComponent() {
   return (
     <header>
-      <StarWarsNameClass />
+      <StarWarsNameFunction />
     </header>
   );
 }

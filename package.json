@@ -15,11 +15,13 @@
     "express": "^4.17.2",
     "nodemon": "^2.0.15",
     "react": "^17.0.1",
-    "react-dom": "^17.0.1"
+    "react-dom": "^17.0.1",
+    "unique-names-generator": "^4.6.0"
   },
   "devDependencies": {
     "@hot-loader/react-dom": "^17.0.1",
     "@types/jest": "^27.0.3",
+    "@types/react": "^17.0.38",
     "clean-webpack-plugin": "^4.0.0",
     "css-loader": "^3.4.2",
     "html-webpack-plugin": "^4.5.2",

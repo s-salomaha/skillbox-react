@@ -1,0 +1,87 @@
+.textContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 22px 20px 13px;
+
+  @media all and (min-width: 1024px) {
+    order: 2;
+    padding: 15px 38px;
+  }
+}
+
+.metaData {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  font-size: 10px;
+  line-height: 1.15;
+  width: 100%;
+
+  @media all and (min-width: 1024px) {
+    order: 2;
+    font-size: 14px;
+  }
+}
+
+.createdAt {
+  &,
+  & * {
+    color: var(--grey99);
+  }
+
+  @media all and (min-width: 1024px) {
+    order: -1;
+    margin-right: 5px;
+  }
+
+  span {
+    display: none;
+
+    @media all and (min-width: 1024px) {
+      display: inline;
+    }
+  }
+}
+
+.title {
+  font-size: 16px;
+  line-height: 19px;
+  font-weight: normal;
+  margin: 0;
+  padding: 7px 0 0;
+  width: 100%;
+
+  @media all and (min-width: 1024px) {
+    font-size: 20px;
+    line-height: 1.15;
+    margin-bottom: 10px;
+    padding: 0;
+  }
+}
+
+.postLink {
+  overflow: hidden;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
+
+  @media all and (min-width: 1024px) {
+    -webkit-line-clamp: 1;
+  }
+
+  @media all and (min-width: 1540px) {
+    &:hover {
+      color: var(--orange);
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+    }
+  }
+}

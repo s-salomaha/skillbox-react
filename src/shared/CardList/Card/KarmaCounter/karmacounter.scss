@@ -1,0 +1,40 @@
+.karmaCounter {
+  > * {
+    padding: 0 2px;
+  }
+
+  @media all and (min-width: 1024px) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-flow: column nowrap;
+
+    > * + * {
+      padding: 7px 0 0;
+    }
+  }
+
+  @media all and (min-width: 1540px) {
+    & > button.up:hover > svg > path {
+      fill: var(--green);
+    }
+
+    & > button.down:hover > svg > path {
+      fill: var(--orange);
+    }
+  }
+}
+
+.karmaValue {
+  color: var(--greyC4);
+
+  @media all and (min-width: 1024px) {
+    font-size: 14px;
+    line-height: 16px;
+    color: var(--black);
+  }
+}
+
+svg.down {
+  transform: rotate(180deg);
+}

@@ -6,8 +6,9 @@ import { Header } from './shared/Header';
 import { Content } from './shared/Content';
 import { CardList } from './shared/CardList';
 import { GenericList } from './shared/GenericList/GenericList';
-import {generateId, generateRandomString} from './utils/react/generateRandomIndex';
+import { generateId, generateRandomString } from './utils/react/generateRandomIndex';
 import { merge } from './utils/js/merge';
+import {Dropdown} from "./shared/Dropdown";
 
 const LIST = [
   { As: 'a' as const, href: '#', text: 'some' },
@@ -31,9 +32,16 @@ function AppComponent() {
       <Header />
       <Content>
         <CardList />
-        <button onClick={hanleAdd}>Add Element</button>
-        <div>
-          <GenericList list={list.map(merge({ onClick: handleItemClick }))} />
+        <div style={{padding: 20}}>
+          <br />
+          <Dropdown
+            onClose={() => console.log('closed')}
+            onOpen={() => console.log('opened')}
+            isOpen={false}
+            button={<button>Test</button>}
+          >
+            <CardList />
+          </Dropdown>
         </div>
       </Content>
     </Layout>

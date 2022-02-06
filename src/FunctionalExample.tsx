@@ -3,7 +3,7 @@
 import React from 'react';
 import {stopPropagation} from './utils/react/stopPropagation';
 import {preventDefault} from './utils/react/preventDefault';
-import {pickFromSyntheticEvent} from './utils/react/pickFromSyntheticEvent';
+import {getChecked, getValue, pickFromSyntheticEvent} from './utils/react/pickFromSyntheticEvent';
 import {withKey} from './utils/react/withKey';
 
 // function add(leftSide: number) {
@@ -85,9 +85,6 @@ function Checkbox(props: { onChange: (value: boolean) => void, value: boolean })
     <input type="checkbox" checked={props.value} onChange={getChecked(props.onChange)} />
   );
 }
-
-export const getValue = pickFromSyntheticEvent<HTMLInputElement>()('value');
-export const getChecked = pickFromSyntheticEvent<HTMLInputElement>()('checked');
 
 // firs version
 // function NotStandardLink(props: any) {

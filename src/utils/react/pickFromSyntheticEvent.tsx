@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 export function pickFromSyntheticEvent<T extends HTMLElement>() {
   return <K extends keyof T>(key: K) =>
@@ -6,3 +6,6 @@ export function pickFromSyntheticEvent<T extends HTMLElement>() {
       (e: React.SyntheticEvent<T>) =>
         fn(e.currentTarget[key]);
 }
+
+export const getValue = pickFromSyntheticEvent<HTMLInputElement>()('value');
+export const getChecked = pickFromSyntheticEvent<HTMLInputElement>()('checked');

@@ -1,13 +1,27 @@
 .commentsButton {
   display: flex;
-  align-items: normal;
+  align-items: center;
+  height: 100%;
+  width: 100%;
 
   * {
     color: var(--greyC4);
   }
 
-  @media all and (min-width: 1024px) {
-    display: none;
+  &_mobile {
+    @media all and (max-width: 1023px) {
+      height: 20px;
+      width: 20px;
+    }
+
+    @media all and (min-width: 1024px) {
+      display: none;
+    }
+  }
+
+  svg {
+    transform: translateY(3px);
+    flex-shrink: 0;
   }
 }
 

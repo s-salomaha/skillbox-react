@@ -1,4 +1,22 @@
 .shareButton {
-  width: 20px;
-  height: 20px;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+
+  &_mobile {
+    @media all and (max-width: 1023px) {
+      width: 20px;
+      height: 20px;
+    }
+
+    @media all and (min-width: 1024px) {
+      display: none;
+    }
+  }
+
+  svg {
+    flex-shrink: 0;
+  }
 }
+

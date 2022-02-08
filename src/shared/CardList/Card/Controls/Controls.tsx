@@ -9,11 +9,11 @@ export function Controls() {
   return (
     <div className={styles.controls}>
       <KarmaCounter />
-      <CommentsButton />
+      <CommentsButton isMobileButton={true} />
 
       <div className={styles.actions}>
-        <ShareButton />
-        <SaveButton />
+        <ShareButton isMobileButton={true} />
+        <SaveButton isMobileButton={true} />
       </div>
     </div>
   );

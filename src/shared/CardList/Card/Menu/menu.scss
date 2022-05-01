@@ -38,6 +38,7 @@
   font-size: 14px;
   cursor: pointer;
   padding: 0 20px;
+  position: relative;
 
   * {
     color: var(--grey99);
@@ -50,8 +51,15 @@
     fill: var(--orange);
   }
 
-  &:not(:last-child) {
-    border-bottom: 1px solid #ECECEC;
+  &:not(:last-child):after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 20px;
+    right: 20px;
+    height: 1px;
+    background-color: #ECECEC;
+    pointer-events: none;
   }
 
   svg {

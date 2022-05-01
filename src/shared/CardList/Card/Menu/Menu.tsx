@@ -10,10 +10,13 @@ import { MenuButton } from './MenuButton';
 import { generateId } from '../../../../utils/react/generateRandomIndex';
 import { GenericList } from '../../../GenericList/GenericList';
 
+const postId = '123456';
+const HideButtonHandler = () => console.log(postId);
+
 const LIST = [
   { className: `${styles.menuListItem} ${styles.menuListItem_desktop}`, itemBody: <CommentsButton /> },
   { className: `${styles.menuListItem} ${styles.menuListItem_desktop}`, itemBody: <ShareButton /> },
-  { className: `${styles.menuListItem}`, itemBody: <HideButton /> },
+  { className: `${styles.menuListItem}`, itemBody: <HideButton />, onClick: HideButtonHandler },
   { className: `${styles.menuListItem} ${styles.menuListItem_desktop}`, itemBody: <SaveButton /> },
   { className: `${styles.menuListItem}`, itemBody: <ComplainButton /> },
   { className: `${styles.menuClose}`, itemBody: 'Закрыть' }

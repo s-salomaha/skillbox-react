@@ -1,0 +1,51 @@
+$sizes: 4, 8, 12, 16, 20;
+
+@each $size in $sizes {
+  .s#{$size} {
+    padding: 0 #{$size}px 0 0;
+  }
+
+  .top.s#{$size} {
+    padding: #{$size}px 0 0;
+  }
+}
+
+@media all and (min-width: 320px) and (max-width: 1023px) {
+  @each $size in $sizes {
+    .mobile_s#{$size} {
+      padding: 0 #{$size}px 0 0;
+    }
+
+    .top.mobile_s#{$size} {
+      padding: #{$size}px 0 0;
+    }
+  }
+}
+
+@media all and (min-width: 1024px) and (max-width: 1539px) {
+  @each $size in $sizes {
+    .tablet_s#{$size} {
+      padding: 0 #{$size}px 0 0;
+    }
+
+    .top.tablet_s#{$size} {
+      padding: #{$size}px 0 0;
+    }
+  }
+}
+
+@media all and (min-width: 1540px) {
+  @each $size in $sizes {
+    .desktop_s#{$size} {
+      padding: 0 #{$size}px 0 0;
+    }
+
+    .top.desktop_s#{$size} {
+      padding: #{$size}px 0 0;
+    }
+  }
+}
+
+.inline {
+  display: inline;
+}

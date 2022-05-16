@@ -1,0 +1,46 @@
+$fontSizes: 28, 20, 16, 14, 12, 10;
+$colors: black, orange, green, white, greyF3, greyF4, greyD9, greyC4, grey99, grey66;
+
+@each $color in $colors {
+  .#{$color} {
+    color: var(--#{$color});
+  }
+}
+
+@each $fontSize in $fontSizes {
+  .s#{$fontSize} {
+    font-size: #{$fontSize}px;
+    line-height: 1.15;
+  }
+}
+
+@media all and (min-width: 320px) and (max-width: 1023px) {
+  @each $fontSize in $fontSizes {
+    .m#{$fontSize} {
+      font-size: #{$fontSize}px;
+      line-height: 1.15;
+    }
+  }
+}
+
+@media all and (min-width: 1024px) and (max-width: 1539px) {
+  @each $fontSize in $fontSizes {
+    .t#{$fontSize} {
+      font-size: #{$fontSize}px;
+      line-height: 1.15;
+    }
+  }
+}
+
+@media all and (min-width: 1540px) {
+  @each $fontSize in $fontSizes {
+    .d#{$fontSize} {
+      font-size: #{$fontSize}px;
+      line-height: 1.15;
+    }
+  }
+}
+
+.bold {
+  font-weight: 700;
+}

@@ -1,11 +1,11 @@
 import React from 'react';
 import styles from './hidebutton.scss';
-import { BlockIcon } from '../../../Icons';
+import { EIcons, Icon } from '../../../Icon';
 
 export function HideButton() {
   return (
     <button className={styles.hideButton}>
-      <BlockIcon />
+      <Icon name={EIcons.block} size={14}/>
       Скрыть
     </button>
   );

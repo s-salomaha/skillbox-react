@@ -1,0 +1,34 @@
+$iconSizes: 2, 4, 6, 8, 10, 12, 14, 16, 18, 20;
+
+@mixin icon($classNameBegin, $iconSize) {
+  #{$classNameBegin}#{$iconSize} > svg {
+    width: #{$iconSize}px;
+    height: #{$iconSize}px;
+  }
+}
+
+@each $iconSize in $iconSizes {
+  @include icon('.icon-s', $iconSize);
+}
+
+@media all and (min-width: 320px) and (max-width: 1023px) {
+  @each $iconSize in $iconSizes {
+    @include icon('.icon-mobile-s', $iconSize);
+  }
+}
+
+@media all and (min-width: 1024px) and (max-width: 1539px) {
+  @each $iconSize in $iconSizes {
+    @include icon('.icon-tablet-s', $iconSize);
+  }
+}
+
+@media all and (min-width: 1540px) {
+  @each $iconSize in $iconSizes {
+    @include icon('.icon-desktop-s', $iconSize);
+  }
+}
+
+[class*="__icon"] {
+  display: inline-flex;
+}

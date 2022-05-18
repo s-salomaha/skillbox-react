@@ -4,7 +4,8 @@
   display: flex;
   align-items: center;
 
-  svg {
+  > svg,
+  [class*="__icon"] {
     flex-shrink: 0;
   }
 }

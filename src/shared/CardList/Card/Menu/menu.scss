@@ -62,7 +62,9 @@
     pointer-events: none;
   }
 
-  svg {
+  button > svg,
+  button > [class*="__icon"],
+  [class*="commentsbutton"] > svg {
     width: 20px;
   }
 

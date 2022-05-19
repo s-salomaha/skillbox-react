@@ -9,6 +9,12 @@ export enum EIcons {
   warning = 'WarningIcon'
 }
 
+const icons = {
+  BlockIcon,
+  MenuIcon,
+  WarningIcon
+};
+
 type TIconSizes = 2 | 4 | 6 | 8 | 10 | 12 | 14 | 16 | 18 | 20;
 
 interface IIconProps {
@@ -28,15 +34,7 @@ export function Icon(props: IIconProps) {
     desktopSize
   } = props;
 
-  let icon: React.ReactNode;
-
-  if (name === 'BlockIcon') {
-    icon = <BlockIcon />;
-  } else if (name === 'MenuIcon') {
-    icon = <MenuIcon />;
-  } else if (name === 'WarningIcon') {
-    icon = <WarningIcon />;
-  }
+  const Icon = icons[name];
 
   return (
     <span
@@ -47,7 +45,7 @@ export function Icon(props: IIconProps) {
         { [styles[`icon-desktop-s${desktopSize}`]]: desktopSize }
       )}
     >
-      {icon}
+      <Icon />
     </span>
   );
 }

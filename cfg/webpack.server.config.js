@@ -3,6 +3,7 @@ const nodeExternals = require('webpack-node-externals');
 const { DefinePlugin } = require('webpack');
 
 const NODE_ENV = process.env.NODE_ENV;
+const IS_DEV = NODE_ENV === 'development';
 const GLOBAL_SCSS_REGEXP = /\.global\.s[ac]ss$/;
 
 module.exports = {

@@ -1,17 +1,19 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import styles from './header.scss';
 import { SearchBlock } from './SearchBlock';
 import { ThreadTitle } from './ThreadTitle';
 import { SortBlock } from './SortBlock';
+import {tokenContext} from "../context/tokenContext";
 
-interface IHeaderProps {
-  token: string;
-}
+export function Header() {
+  const { Consumer } = tokenContext;
+  const token = useContext(tokenContext);
 
-export function Header({ token }: IHeaderProps) {
   return (
     <header className={styles.header}>
-      <SearchBlock token={token} />
+      <Consumer>
+        {(token) => <SearchBlock token={token} />}
+      </Consumer>
       <ThreadTitle />
       <SortBlock />
     </header>

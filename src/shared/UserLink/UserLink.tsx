@@ -1,15 +1,38 @@
-import React from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import styles from './userlink.scss';
+import axios from "axios";
+import { postContext } from '../context/postContext';
+
+interface IAuthorData {
+  url?: string;
+  avatar?: string;
+}
 
 export function UserLink() {
+  const authorName = useContext(postContext).authorName;
+  const [authorData, setAuthorData] = useState<IAuthorData>({});
+
+  useEffect(() => {
+    axios.get(`https://www.reddit.com/user/${authorName}/about.json`)
+      .then((resp) => {
+        const data = resp.data.data;
+
+        setAuthorData({
+          url: data.subreddit ? `https://www.reddit.com${data.subreddit.url}` : '#author_url',
+          avatar: data.icon_img.split('?')[0]
+        });
+      })
+      .catch(console.log);
+  }, []);
+
   return (
     <div className={styles.userLink}>
       <img
         className={styles.avatar}
-        src="https://cdn.dribbble.com/users/3849383/avatars/normal/a7ccfe1268fdaf56228ef0ee56e718aa.jpg?1627924641"
+        src={authorData.avatar}
         alt="avatar"
       />
-      <a href="#user-url" className={styles.userName}>Дмитрий Гришин</a>
+      <a href={authorData.url} className={styles.userName}>{authorName}</a>
     </div>
   );
 }

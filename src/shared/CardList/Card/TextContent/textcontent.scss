@@ -5,6 +5,7 @@
   padding: 22px 20px 13px;
 
   @media all and (min-width: 1024px) {
+    flex-grow: 1;
     order: 2;
     padding: 15px 38px;
   }

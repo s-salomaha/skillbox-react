@@ -11,7 +11,6 @@ import { UserContextProvider } from './shared/context/userContext';
 
 function AppComponent() {
   const [token] = useToken();
-  const { Provider } = tokenContext;
 
   return (
     <tokenContext.Provider value={token}>

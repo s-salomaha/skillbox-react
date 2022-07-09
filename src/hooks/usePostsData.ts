@@ -18,7 +18,8 @@ export function usePostsData() {
             thumbnail: getPostThumbnail(post.data.thumbnail),
             authorName: post.data.author,
             karmaValue: post.data.ups,
-            created_utc: post.data.created_utc
+            created_utc: post.data.created_utc,
+            url: post.data.url
           })));
         }
       })

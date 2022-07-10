@@ -16,8 +16,11 @@
 
 }
 
-.content {
-  line-height: 1.7;
+.contentWrap {
   overflow-y: auto;
   padding-right: 40px;
+}
+
+.content {
+  line-height: 1.7;
 }

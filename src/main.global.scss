@@ -47,3 +47,8 @@ button {
   background: transparent;
   cursor: pointer;
 }
+
+#dropdown_root {
+  position: relative;
+  z-index: 1;
+}

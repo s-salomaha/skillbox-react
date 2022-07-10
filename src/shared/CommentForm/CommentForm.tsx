@@ -1,11 +1,12 @@
-import React, { ChangeEvent, FormEvent, useState } from 'react';
+import React, { ChangeEvent, FormEvent, useContext } from 'react';
 import styles from './commentform.scss';
+import { commentContext } from '../context/commentContext';
 
 export function CommentForm() {
-  const [value, setValue] = useState('');
+  const { value, onChange } = useContext(commentContext);
 
   function handeChange(event: ChangeEvent<HTMLTextAreaElement>) {
-    setValue(event.target.value);
+    onChange(event.target.value);
   }
 
   function handleSubmit(event: FormEvent) {

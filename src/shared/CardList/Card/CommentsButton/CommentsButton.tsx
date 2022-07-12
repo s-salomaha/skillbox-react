@@ -3,17 +3,18 @@ import styles from './commentsbutton.scss';
 
 interface ICommentsButtonProps {
   isMobileButton?: boolean;
+  buttonTitle?: string;
 }
 
-export function CommentsButton({ isMobileButton = false }: ICommentsButtonProps) {
+export function CommentsButton({ isMobileButton = false, buttonTitle = 'Комментарии' }: ICommentsButtonProps) {
   return (
-    <div className={`${styles.commentsButton} ${isMobileButton ? styles.commentsButton_mobile : ''}`}>
+    <button className={`${styles.commentsButton} ${isMobileButton ? styles.commentsButton_mobile : ''}`}>
       {!isMobileButton && (
         <>
           <svg width="15" height="15" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M12.75.417H1.417A1.42 1.42 0 0 0 0 1.833v8.5c0 .78.637 1.417 1.417 1.417h9.916l2.834 2.833V1.833A1.42 1.42 0 0 0 12.75.417Zm-1.417 8.5h-8.5V7.5h8.5v1.417Zm0-2.125h-8.5V5.375h8.5v1.417Zm0-2.125h-8.5V3.25h8.5v1.417Z" fill="#999"/>
           </svg>
-          Комментарии
+          {buttonTitle}
         </>
       )}
       {isMobileButton && (
@@ -24,6 +25,6 @@ export function CommentsButton({ isMobileButton = false }: ICommentsButtonProps)
           <span className={styles.commentsNumber}>13</span>
         </>
         )}
-    </div>
+    </button>
   );
 }

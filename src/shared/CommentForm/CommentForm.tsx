@@ -1,23 +1,23 @@
-import React, { ChangeEvent, FormEvent, useContext } from 'react';
+import React, { useContext } from 'react';
 import styles from './commentform.scss';
-import { commentContext } from '../context/commentContext';
+import { Comment } from '../Comment';
+import { ControlledForm } from '../ControlledForm';
+import { postContext } from '../context/postContext';
 
 export function CommentForm() {
-  const { value, onChange } = useContext(commentContext);
-
-  function handeChange(event: ChangeEvent<HTMLTextAreaElement>) {
-    onChange(event.target.value);
-  }
-
-  function handleSubmit(event: FormEvent) {
-    event.preventDefault();
-    console.log(value);
-  }
+  const postData = useContext(postContext);
+  const postId = postData.postID;
 
   return (
-    <form className={styles.form} onSubmit={handleSubmit}>
-      <textarea className={styles.input} value={value} onChange={handeChange} />
-      <button type="submit" className={styles.button}>Комментировать</button>
-    </form>
+    <>
+      <ControlledForm formId={postId}/>
+
+      <div className={styles.comments}>
+        <Comment commentId={`${postId}$-comment1`} >
+          <Comment commentId={`${postId}$-comment2`} />
+          <Comment commentId={`${postId}$-comment3`} />
+        </Comment>
+      </div>
+    </>
   );
 }

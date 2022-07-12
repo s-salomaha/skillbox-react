@@ -1,11 +1,14 @@
 import React from 'react';
 
 type CommentContextType = {
-  value: string;
+  value: any;
   onChange: (value: string) => void;
 }
 
+// export const commentContext = React.createContext<any>({});
+
 export const commentContext = React.createContext<CommentContextType>({
-  value: '',
+  value: {},
   onChange: () => {}
 });
+

@@ -1,8 +1,7 @@
-import React, { ChangeEvent, useContext } from 'react';
-import { commentContext } from '../context/commentContext';
+import React, { ChangeEvent } from 'react';
 import { Form } from '../Form';
-import { useStore } from 'react-redux';
-import { RootState } from '../../App';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState, updateComment } from '../../store';
 
 interface IControlledFormProps {
   authorName?: string;
@@ -11,10 +10,9 @@ interface IControlledFormProps {
 }
 
 export function ControlledForm({ authorName = '', setFocus = false, formId }: IControlledFormProps) {
-  const store = useStore<RootState>();
-  const commentValueData = store.getState().value;
+  const commentValueData = useSelector<RootState, any>(state => state.commentValues);
+  const dispatch = useDispatch();
 
-  const { onChange } = useContext(commentContext);
   const commentValue: string = getCommentValue(commentValueData);
 
   function getCommentValue(commentValueObjext: any) {
@@ -24,7 +22,7 @@ export function ControlledForm({ authorName = '', setFocus = false, formId }: IC
 
   function handeChange(event: ChangeEvent<HTMLTextAreaElement>) {
     const newCommentValueData = { ...commentValueData, [formId]: event.target.value };
-    onChange(newCommentValueData);
+    dispatch(updateComment(newCommentValueData));
   }
 
   function getTextareaValue() {

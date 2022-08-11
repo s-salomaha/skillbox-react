@@ -1,6 +1,8 @@
 import React, { ChangeEvent, useContext } from 'react';
 import { commentContext } from '../context/commentContext';
 import { Form } from '../Form';
+import { useStore } from 'react-redux';
+import { RootState } from '../../App';
 
 interface IControlledFormProps {
   authorName?: string;
@@ -9,7 +11,10 @@ interface IControlledFormProps {
 }
 
 export function ControlledForm({ authorName = '', setFocus = false, formId }: IControlledFormProps) {
-  const { value: commentValueData, onChange } = useContext(commentContext);
+  const store = useStore<RootState>();
+  const commentValueData = store.getState().value;
+
+  const { onChange } = useContext(commentContext);
   const commentValue: string = getCommentValue(commentValueData);
 
   function getCommentValue(commentValueObjext: any) {

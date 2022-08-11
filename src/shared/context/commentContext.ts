@@ -5,10 +5,7 @@ type CommentContextType = {
   onChange: (value: string) => void;
 }
 
-// export const commentContext = React.createContext<any>({});
-
 export const commentContext = React.createContext<CommentContextType>({
   value: {},
   onChange: () => {}
 });
-

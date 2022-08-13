@@ -20,7 +20,7 @@ export function ControlledForm({ authorName = '', setFocus = false, formId }: IC
     return '';
   }
 
-  function handeChange(event: ChangeEvent<HTMLTextAreaElement>) {
+  function handleChange(event: ChangeEvent<HTMLTextAreaElement>) {
     const newCommentValueData = { ...commentValueData, [formId]: event.target.value };
     dispatch(updateComment(newCommentValueData));
   }
@@ -33,7 +33,7 @@ export function ControlledForm({ authorName = '', setFocus = false, formId }: IC
     <Form
       textareaTagProps={{
         value: getTextareaValue(),
-        onChange: handeChange
+        onChange: handleChange
       }}
       setFocus={setFocus}
     />

@@ -1,4 +1,4 @@
-import React, {FormEvent, useEffect, useRef} from 'react';
+import React, { FormEvent, useEffect, useRef } from 'react';
 import styles from './form.scss';
 
 interface IFormProps {

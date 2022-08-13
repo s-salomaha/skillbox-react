@@ -1,6 +1,6 @@
 import express from 'express';
 import ReactDOM from 'react-dom/server';
-import { indexTemplate } from "./indexTemplate";
+import { indexTemplate } from './indexTemplate';
 import { App } from '../App';
 import axios from 'axios';
 

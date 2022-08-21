@@ -7,12 +7,24 @@ import { Content } from './shared/Content';
 import { CardList } from './shared/CardList';
 import { UserContextProvider } from './shared/context/userContext';
 
-import { createStore } from 'redux';
+import { applyMiddleware, createStore, Middleware } from 'redux';
 import { Provider } from 'react-redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { rootReducer } from './store';
 
-const store = createStore(rootReducer, composeWithDevTools());
+const ping: Middleware = (store) => (next) => (action) => {
+  console.log('ping');
+  const returnValue = next(action);
+};
+
+const pong: Middleware = (store) => (next) => (action) => {
+  console.log('pong');
+  const returnValue = next(action);
+};
+
+const store = createStore(rootReducer, composeWithDevTools(
+  applyMiddleware(ping, pong)
+));
 
 function AppComponent() {
   return (

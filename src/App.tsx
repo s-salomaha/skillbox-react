@@ -7,24 +7,22 @@ import { Content } from './shared/Content';
 import { CardList } from './shared/CardList';
 import { UserContextProvider } from './shared/context/userContext';
 
-import { applyMiddleware, createStore, Middleware } from 'redux';
-import { Provider } from 'react-redux';
+import { Action, applyMiddleware, createStore } from 'redux';
+import { Provider, useDispatch } from 'react-redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import { rootReducer } from './store';
-
-const ping: Middleware = (store) => (next) => (action) => {
-  console.log('ping');
-  const returnValue = next(action);
-};
-
-const pong: Middleware = (store) => (next) => (action) => {
-  console.log('pong');
-  const returnValue = next(action);
-};
+import { rootReducer, RootState } from './store';
+import thunk, { ThunkAction } from 'redux-thunk';
 
 const store = createStore(rootReducer, composeWithDevTools(
-  applyMiddleware(ping, pong)
+  applyMiddleware(thunk)
 ));
+
+export const timeout = (ms: number): ThunkAction<void, RootState, unknown, Action<string>> => (dispatch, _getState) => {
+  dispatch({ type: 'START' });
+  setTimeout(() => {
+    dispatch({ type: 'FINISH' });
+  }, ms);
+};
 
 function AppComponent() {
   return (

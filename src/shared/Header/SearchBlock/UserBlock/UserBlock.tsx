@@ -5,9 +5,10 @@ import { AnonIcon } from '../../../Icons';
 interface IUserBlockProps {
   avatarSrc?: string;
   username?: string;
+  loading?: boolean;
 }
 
-export function UserBlock({ avatarSrc, username }: IUserBlockProps) {
+export function UserBlock({ avatarSrc, username, loading }: IUserBlockProps) {
   return (
     <a
       className={styles.userBox}
@@ -21,7 +22,11 @@ export function UserBlock({ avatarSrc, username }: IUserBlockProps) {
       </div>
 
       <div className={styles.username}>
-        {username || 'Аноним'}
+        {loading ? (
+          <span>Загрузка</span>
+        ) : (
+          <span>{username || 'Аноним'}</span>
+        )}
       </div>
     </a>
   );

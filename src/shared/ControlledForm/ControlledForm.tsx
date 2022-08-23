@@ -1,7 +1,7 @@
 import React, { ChangeEvent } from 'react';
 import { Form } from '../Form';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState, updateComment } from '../../store';
+import { RootState, updateComment } from '../../store/reducer';
 
 interface IControlledFormProps {
   authorName?: string;

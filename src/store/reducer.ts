@@ -1,4 +1,4 @@
-import { ActionCreator, Reducer } from 'redux';
+import { Action, ActionCreator, Reducer } from 'redux';
 import {
   ME_REQUEST,
   ME_REQUEST_ERROR,
@@ -8,6 +8,7 @@ import {
   MeRequestSuccessAction
 } from './me/actions';
 import { meReducer, MeState } from './me/reducer';
+import { ThunkAction } from 'redux-thunk';
 
 export type RootState = {
   commentValues: any;
@@ -46,6 +47,17 @@ export const setToken: ActionCreator<SetTokenAction> = (token) => ({
   type: SET_TOKEN,
   token
 });
+
+export const saveToken = (): ThunkAction<
+    void,
+    RootState,
+    unknown,
+    Action<string>
+  > => (dispatch) => {
+  if (window.__token__) {
+    dispatch(setToken(window.__token__));
+  }
+}
 
 type MyAction = UpdateCommentAction
   | SetTokenAction

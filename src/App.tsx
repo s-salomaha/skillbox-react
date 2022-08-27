@@ -7,11 +7,11 @@ import { Content } from './shared/Content';
 import { CardList } from './shared/CardList';
 import { UserContextProvider } from './shared/context/userContext';
 
-import { Action, applyMiddleware, createStore } from 'redux';
-import { Provider, useDispatch } from 'react-redux';
+import { applyMiddleware, createStore } from 'redux';
+import { Provider } from 'react-redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import { rootReducer, RootState } from './store/reducer';
-import thunk, { ThunkAction } from 'redux-thunk';
+import { rootReducer } from './store/reducer';
+import thunk from 'redux-thunk';
 
 const store = createStore(rootReducer, composeWithDevTools(
   applyMiddleware(thunk)

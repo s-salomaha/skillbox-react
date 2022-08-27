@@ -36,7 +36,12 @@ export const meRequestError: ActionCreator<MeRequestErrorAction> = (error: strin
   error
 });
 
-export const meRequestAsync = (): ThunkAction<void, RootState, unknown, Action<string>> => (dispatch, getState) => {
+export const meRequestAsync = (): ThunkAction<
+    void,
+    RootState,
+    unknown,
+    Action<string>
+  > => (dispatch, getState) => {
   dispatch(meRequest());
 
   axios.get('https://oauth.reddit.com/api/v1/me', {

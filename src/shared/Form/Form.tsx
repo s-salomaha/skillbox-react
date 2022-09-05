@@ -1,56 +1,50 @@
-import React, {ChangeEvent, FormEvent, useEffect, useRef, useState} from 'react';
+import React, { useEffect } from 'react';
 import styles from './form.scss';
+import { useForm } from 'react-hook-form';
 
 interface IFormProps {
   textareaTagProps?: {},
-  setFocus?: boolean;
+  setFocusOnField?: boolean;
   setAuthorNameByFocus?: boolean;
   authorName?: string;
+  handleChange?: any;
 }
 
-export function Form({ textareaTagProps, setFocus, setAuthorNameByFocus = false, authorName = '' }: IFormProps) {
-  const textAreaRef = useRef<HTMLTextAreaElement>(null);
-  const [value, setValue] = useState('');
-  const [formTouched, setFormToched] = useState(false);
-  const [valueError, setValueError] = useState('');
+export function Form({ textareaTagProps, setFocusOnField, setAuthorNameByFocus = false, authorName = '', handleChange = null }: IFormProps) {
+  const { register, formState: { errors }, handleSubmit, setFocus, setValue } = useForm({
+    reValidateMode: 'onChange'
+  });
 
-  function handleSubmit(event: FormEvent) {
-    event.preventDefault();
-    setFormToched(true);
-    setValueError(validateValue());
-
-    const isFormValid = !validateValue();
-    if (!isFormValid) return;
-
+  function onSubmit() {
     alert('Форма отправлена!');
   }
 
-  function handleChange(event: ChangeEvent<HTMLTextAreaElement>) {
-    setValue(event.target.value);
-  }
-
-  function validateValue() {
-    if (value.length <= 3) return 'Введите больше 3-х символов';
-    return '';
-  }
-
   useEffect(() => {
-    if (textAreaRef.current) {
-      if (setFocus) textAreaRef.current.focus();
-      if (setAuthorNameByFocus && authorName !== '') textAreaRef.current.value = authorName;
-    }
-  }, []);
+    if (setFocusOnField) setFocus('message');
+    if (setAuthorNameByFocus && authorName !== '') setValue('message', authorName);
+  }, [setFocus]);
 
   return (
-    <form className={styles.form} onSubmit={handleSubmit}>
-      {/*<textarea className={styles.input} ref={textAreaRef} {...textareaTagProps} />*/}
+    <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
       <textarea
         className={styles.input}
-        value={value}
-        onChange={handleChange}
-        aria-invalid={valueError ? 'true' : undefined}
+        {...register('message', {
+          required: 'Это обязательно поле!',
+          minLength: {
+            value: 3,
+            message: 'Введите больше 3-х символов',
+          },
+          onChange: (e) => {
+            if (!handleChange) return;
+            handleChange(e);
+          }
+        })}
+        aria-invalid={errors.message ? 'true' : 'false'}
+        {...textareaTagProps}
       />
-      {formTouched && valueError && (<div>{valueError}</div>)}
+
+      {errors.message && <p>{errors.message.message}</p>}
+
       <div className={styles.formFooter}>
         <button type="submit" className={styles.button}>Комментировать</button>
       </div>

@@ -5,11 +5,11 @@ import { RootState, updateComment } from '../../store/reducer';
 
 interface IControlledFormProps {
   authorName?: string;
-  setFocus?: boolean;
+  setFocusOnField?: boolean;
   formId: string;
 }
 
-export function ControlledForm({ authorName = '', setFocus = false, formId }: IControlledFormProps) {
+export function ControlledForm({ authorName = '', setFocusOnField = false, formId }: IControlledFormProps) {
   const commentValueData = useSelector<RootState, any>(state => state.commentValues);
   const dispatch = useDispatch();
 
@@ -32,10 +32,10 @@ export function ControlledForm({ authorName = '', setFocus = false, formId }: IC
   return (
     <Form
       textareaTagProps={{
-        value: getTextareaValue(),
-        onChange: handleChange
+        value: getTextareaValue()
       }}
-      setFocus={setFocus}
+      handleChange={handleChange}
+      setFocusOnField={setFocusOnField}
     />
   );
 }

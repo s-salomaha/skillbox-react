@@ -54,9 +54,9 @@ export function Comment({ commentId, children }: ICommentProps) {
         {isFormOpened && (
           <div className={styles.commentReplyForm}>
             <h3>Controlled form:</h3>
-            <ControlledForm setFocus={true} authorName="Михаил Рогов, " formId={commentId} />
+            <ControlledForm setFocusOnField={true} authorName="Михаил Рогов, " formId={commentId} />
             <h3>Uncontrolled form:</h3>
-            <UncontrolledForm setFocus={true} authorName="Михаил Рогов, " />
+            <UncontrolledForm setFocusOnField={true} authorName="Михаил Рогов, " />
           </div>
         )}
 

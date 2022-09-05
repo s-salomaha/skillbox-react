@@ -3,13 +3,13 @@ import { Form } from '../Form';
 
 interface IUncontrolledFormProps {
   authorName?: string;
-  setFocus?: boolean;
+  setFocusOnField?: boolean;
 }
 
-export function UncontrolledForm({ authorName = '', setFocus = false }: IUncontrolledFormProps) {
+export function UncontrolledForm({ authorName = '', setFocusOnField = false }: IUncontrolledFormProps) {
   return (
     <Form
-      setFocus={setFocus}
+      setFocusOnField={setFocusOnField}
       setAuthorNameByFocus={true}
       authorName={authorName}
     />

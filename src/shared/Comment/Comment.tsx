@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Markdown from 'markdown-to-jsx';
 import styles from './comment.scss';
 import { UserLink } from '../UserLink';
 import { CommentsButton } from '../CardList/Card/CommentsButton';
@@ -9,11 +10,21 @@ import { UncontrolledForm } from '../UncontrolledForm';
 
 interface ICommentProps {
   commentId: string;
-  children?: React.ReactNode;
+  authorName: string;
+  body: string;
+  createdUtc: number;
+  subreddit: string;
 }
 
-export function Comment({ commentId, children }: ICommentProps) {
+export function Comment({
+  commentId,
+  authorName,
+  body,
+  createdUtc,
+  subreddit
+}: ICommentProps) {
   const [isFormOpened, setIsFormOpened] = useState(false);
+  const formattedDate = new Date(createdUtc * 1000).toLocaleString();
 
   return (
     <div className={styles.comment}>
@@ -33,15 +44,12 @@ export function Comment({ commentId, children }: ICommentProps) {
 
       <div className="commentBody">
         <div className={styles.commentMetaData}>
-          <UserLink />
-          <span className={styles.commentCreatedAt}>1 час назад</span>
-          <span className={styles.commentCategory}>Законодательство</span>
+          <UserLink authorName={authorName}/>
+          <span className={styles.commentCreatedAt}>{formattedDate}</span>
+          <span className={styles.commentCategory}>{subreddit}</span>
         </div>
         <div className={styles.commentText}>
-          <p>
-            Сторонники тоталитаризма в науке будут объективно рассмотрены соответствующими инстанциями.
-            Лишь реплицированные с зарубежных источников, современные исследования будут описаны максимально подробно.
-          </p>
+          <Markdown options={{ forceBlock: true }}>{body}</Markdown>
         </div>
         <div className={styles.commentButtons}>
           <span onClick={() => setIsFormOpened(!isFormOpened)}>
@@ -54,14 +62,13 @@ export function Comment({ commentId, children }: ICommentProps) {
         {isFormOpened && (
           <div className={styles.commentReplyForm}>
             <h3>Controlled form:</h3>
-            <ControlledForm setFocusOnField={true} authorName="Михаил Рогов, " formId={commentId} />
+            <ControlledForm setFocusOnField={true} authorName={`${authorName}, `} formId={commentId} />
             <h3>Uncontrolled form:</h3>
-            <UncontrolledForm setFocusOnField={true} authorName="Михаил Рогов, " />
+            <UncontrolledForm setFocusOnField={true} authorName={`${authorName}, `} />
           </div>
         )}
 
         <div className="commentChildren">
-          {children}
         </div>
       </div>
     </div>

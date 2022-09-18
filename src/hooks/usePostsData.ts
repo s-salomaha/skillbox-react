@@ -20,6 +20,7 @@ export function usePostsData() {
             authorName: post.data.author,
             karmaValue: post.data.ups,
             created_utc: post.data.created_utc,
+            subreddit: post.data.subreddit,
             url: post.data.url
           })));
         }

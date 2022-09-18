@@ -44,11 +44,24 @@
   font-size: 14px;
   padding: 0 10px;
   margin-left: 10px;
+
+  &::first-letter {
+    text-transform: capitalize;
+  }
 }
 
 .commentText {
   p {
     line-height: 1.5;
+  }
+
+  a {
+    color: blue;
+    text-decoration: underline;
+
+    &:hover {
+      text-decoration: none;
+    }
   }
 }
 

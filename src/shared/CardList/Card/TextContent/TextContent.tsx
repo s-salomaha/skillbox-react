@@ -14,7 +14,7 @@ export function TextContent() {
   return (
     <div className={styles.textContent}>
       <div className={styles.metaData}>
-        {authorName !== '[deleted]' && <UserLink />}
+        {authorName !== '[deleted]' && <UserLink authorName={authorName}/>}
         <span className={styles.createdAt}>
           <span className={styles.publishedLabel}>опубликовано </span>
           {formattedDate}

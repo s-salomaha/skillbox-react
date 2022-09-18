@@ -15,6 +15,7 @@ export function Post(props: IPost) {
   const postData = useContext(postContext);
   const title = postData.title;
   const authorName = postData.authorName;
+  const subreddit = postData.subreddit;
   const formattedDate = new Date(postData.created_utc * 1000).toLocaleString();
 
   useEffect(() => {
@@ -46,8 +47,8 @@ export function Post(props: IPost) {
           <h2 className={styles.modalTitle}>{title}</h2>
           <div className={styles.modalMetaData}>
             <span className={styles.modalCreatedAt}>опубликовано {formattedDate}</span>
-            {authorName !== '[deleted]' && <UserLink />}
-            <span className={styles.modalCategory}>Законодательство</span>
+            {authorName !== '[deleted]' && <UserLink authorName={authorName}/>}
+            <span className={styles.modalCategory}>{subreddit}</span>
           </div>
         </div>
       </div>

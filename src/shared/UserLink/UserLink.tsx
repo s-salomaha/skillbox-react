@@ -8,8 +8,11 @@ interface IAuthorData {
   avatar?: string;
 }
 
-export function UserLink() {
-  const authorName = useContext(postContext).authorName;
+interface IUserLinkProps {
+  authorName: string;
+}
+
+export function UserLink({ authorName }: IUserLinkProps) {
   const [authorData, setAuthorData] = useState<IAuthorData>({});
 
   useEffect(() => {
@@ -27,12 +30,13 @@ export function UserLink() {
 
   return (
     <div className={styles.userLink}>
-      <img
+      {authorData.avatar && <img
         className={styles.avatar}
         src={authorData.avatar}
         alt="avatar"
-      />
-      <a href={authorData.url} className={styles.userName}>{authorName}</a>
+      />}
+
+      {authorData.url && <a href={authorData.url} className={styles.userName}>{authorName}</a>}
     </div>
   );
 }

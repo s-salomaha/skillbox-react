@@ -4,6 +4,7 @@ import { Card } from './Card';
 import { usePostsData } from "../../hooks/usePostsData";
 import { postsContext } from '../context/postsContext';
 import { postContext } from '../context/postContext';
+import { Spinner } from '../Spinner';
 
 export function CardList() {
   const [posts] = usePostsData();
@@ -11,6 +12,8 @@ export function CardList() {
   return (
     <postsContext.Provider value={posts}>
       <ul className={styles.cardList}>
+        {!posts.length && <Spinner />}
+
         {posts.map(post => (
           <postContext.Provider value={post} key={post.postID}>
             <Card />

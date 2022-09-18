@@ -23,7 +23,6 @@ export function CommentForm() {
           authorName={comment.authorName}
           body={comment.body}
           createdUtc={comment.created_utc}
-          subreddit={comment.subreddit}
           key={comment.commentID}
         />
       ))}

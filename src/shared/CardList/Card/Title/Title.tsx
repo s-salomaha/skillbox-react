@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styles from './title.scss';
-import { Post } from "../../../Post";
+import { Post } from '../../../Post';
 
 interface ITitleProps {
   url: string;

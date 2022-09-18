@@ -1,9 +1,10 @@
-import React, {useContext} from 'react';
+import React, { useContext } from 'react';
 import styles from './preview.scss';
 import { postContext } from '../../../context/postContext';
 
 export function Preview() {
-  const thumbnail = useContext(postContext).thumbnail === 'self'
+  const thumbnailDefaultsArray = ['self', 'default'];
+  const thumbnail = thumbnailDefaultsArray.includes(useContext(postContext).thumbnail)
     ? 'https://via.placeholder.com/500x500.png?text=Reddit'
     : useContext(postContext).thumbnail;
 

@@ -15,7 +15,12 @@ export function Post(props: IPost) {
   const postData = useContext(postContext);
   const title = postData.title;
   const authorName = postData.authorName;
-  const subreddit = postData.subreddit;
+  const linkFlairText = postData.linkFlairText;
+  const linkFlairTextColor = postData.linkFlairTextColor;
+  const linkFlairBackgroundColor = postData.linkFlairBackgroundColor;
+  const selftext = postData.selftext;
+  const imageUrl = postData.imageUrl;
+  const linkUrl = postData.linkUrl;
   const formattedDate = new Date(postData.created_utc * 1000).toLocaleString();
 
   useEffect(() => {
@@ -48,21 +53,31 @@ export function Post(props: IPost) {
           <div className={styles.modalMetaData}>
             <span className={styles.modalCreatedAt}>опубликовано {formattedDate}</span>
             {authorName !== '[deleted]' && <UserLink authorName={authorName}/>}
-            <span className={styles.modalCategory}>{subreddit}</span>
+            {linkFlairText && linkFlairBackgroundColor && <span
+              className={styles.modalCategory}
+              style={{
+                background: linkFlairBackgroundColor,
+                color: linkFlairTextColor
+              }}
+            >
+              {linkFlairText}
+            </span>}
           </div>
         </div>
       </div>
 
       <div className={styles.contentWrap}>
         <div className={styles.content}>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-            proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-          </p>
+          {selftext && <p>
+            {selftext}
+          </p>}
+
+          {imageUrl && <img
+            src={imageUrl}
+            alt={title}
+          />}
+
+          {linkUrl && <a href={linkUrl} target="_blank">{linkUrl}</a>}
         </div>
 
         <CommentForm />

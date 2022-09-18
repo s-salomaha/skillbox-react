@@ -13,15 +13,13 @@ interface ICommentProps {
   authorName: string;
   body: string;
   createdUtc: number;
-  subreddit: string;
 }
 
 export function Comment({
   commentId,
   authorName,
   body,
-  createdUtc,
-  subreddit
+  createdUtc
 }: ICommentProps) {
   const [isFormOpened, setIsFormOpened] = useState(false);
   const formattedDate = new Date(createdUtc * 1000).toLocaleString();
@@ -46,7 +44,6 @@ export function Comment({
         <div className={styles.commentMetaData}>
           <UserLink authorName={authorName}/>
           <span className={styles.commentCreatedAt}>{formattedDate}</span>
-          <span className={styles.commentCategory}>{subreddit}</span>
         </div>
         <div className={styles.commentText}>
           <Markdown options={{ forceBlock: true }}>{body}</Markdown>

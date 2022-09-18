@@ -42,7 +42,9 @@ function makeCommentData(commentData: any) {
     authorName: commentData.data.author,
     body: commentData.data.body,
     created_utc: commentData.data.created_utc,
-    subreddit: commentData.data.subreddit,
+    linkFlairText: commentData.data.link_flair_text,
+    linkFlairBackgroundColor: commentData.data.link_flair_background_color,
+    linkFlairTextColor: commentData.data.link_flair_text_color === 'dark' ? '#333333' : '#fff',
     replies: getReplies(commentData.data.replies),
     kind: commentData.kind
   }

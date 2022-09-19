@@ -1,10 +1,10 @@
 import React from 'react';
 import './main.global.scss';
 import { hot } from 'react-hot-loader/root';
-import { Layout } from './shared/Layout';
-import { Header } from './shared/Header';
-import { Content } from './shared/Content';
-import { CardList } from './shared/CardList';
+import { Layout } from './shared/components/Layout';
+import { Header } from './shared/components/Header';
+import { Content } from './shared/components/Content';
+import { CardList } from './shared/components/CardList';
 import { UserContextProvider } from './shared/context/userContext';
 
 import { applyMiddleware, createStore } from 'redux';

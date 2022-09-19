@@ -6,7 +6,7 @@ export function ComplainButton() {
   return (
     <button className={styles.complainButton}>
       <WarningIcon />
-      Пожаловаться
+      Complain
     </button>
   );
 }

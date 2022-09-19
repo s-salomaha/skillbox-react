@@ -51,7 +51,7 @@ export function Post(props: IPost) {
         <div className={styles.modalHeaderRight}>
           <h2 className={styles.modalTitle}>{title}</h2>
           <div className={styles.modalMetaData}>
-            <span className={styles.modalCreatedAt}>опубликовано {formattedDate}</span>
+            <span className={styles.modalCreatedAt}>published {formattedDate}</span>
             {authorName !== '[deleted]' && <UserLink authorName={authorName}/>}
             {linkFlairText && linkFlairBackgroundColor && <span
               className={styles.modalCategory}

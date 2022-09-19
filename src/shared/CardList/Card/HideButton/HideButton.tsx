@@ -6,7 +6,7 @@ export function HideButton() {
   return (
     <button className={styles.hideButton}>
       <Icon name={EIcons.block} size={14}/>
-      Скрыть
+      Hide
     </button>
   );
 }

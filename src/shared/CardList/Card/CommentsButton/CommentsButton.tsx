@@ -6,7 +6,7 @@ interface ICommentsButtonProps {
   buttonTitle?: string;
 }
 
-export function CommentsButton({ isMobileButton = false, buttonTitle = 'Комментарии' }: ICommentsButtonProps) {
+export function CommentsButton({ isMobileButton = false, buttonTitle = 'Comments' }: ICommentsButtonProps) {
   return (
     <button className={`${styles.commentsButton} ${isMobileButton ? styles.commentsButton_mobile : ''}`}>
       {!isMobileButton && (

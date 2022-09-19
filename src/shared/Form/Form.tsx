@@ -16,7 +16,7 @@ export function Form({ textareaTagProps, setFocusOnField, setAuthorNameByFocus =
   });
 
   function onSubmit() {
-    alert('Форма отправлена!');
+    alert('Form submitted!');
   }
 
   useEffect(() => {
@@ -29,10 +29,10 @@ export function Form({ textareaTagProps, setFocusOnField, setAuthorNameByFocus =
       <textarea
         className={styles.input}
         {...register('message', {
-          required: 'Это обязательно поле!',
+          required: 'This field is required!',
           minLength: {
             value: 3,
-            message: 'Введите больше 3-х символов',
+            message: 'Type more than 3 symbols',
           },
           onChange: (e) => {
             if (!handleChange) return;
@@ -46,7 +46,7 @@ export function Form({ textareaTagProps, setFocusOnField, setAuthorNameByFocus =
       {errors.message && <p>{errors.message.message}</p>}
 
       <div className={styles.formFooter}>
-        <button type="submit" className={styles.button}>Комментировать</button>
+        <button type="submit" className={styles.button}>Comment</button>
       </div>
     </form>
   );

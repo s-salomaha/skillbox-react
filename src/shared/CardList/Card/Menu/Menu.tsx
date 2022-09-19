@@ -19,7 +19,7 @@ const LIST = [
   { className: `${styles.menuListItem}`, itemBody: <HideButton />, onClick: HideButtonHandler },
   { className: `${styles.menuListItem} ${styles.menuListItem_desktop}`, itemBody: <SaveButton /> },
   { className: `${styles.menuListItem}`, itemBody: <ComplainButton /> },
-  { className: `${styles.menuClose}`, itemBody: 'Закрыть' }
+  { className: `${styles.menuClose}`, itemBody: 'Close' }
 ].map(generateId);
 
 export function Menu() {

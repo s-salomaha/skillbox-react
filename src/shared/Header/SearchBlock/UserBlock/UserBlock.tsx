@@ -23,9 +23,9 @@ export function UserBlock({ avatarSrc, username, loading }: IUserBlockProps) {
 
       <div className={styles.username}>
         {loading ? (
-          <span>Загрузка</span>
+          <span>Loading</span>
         ) : (
-          <span>{username || 'Аноним'}</span>
+          <span>{username || 'Login'}</span>
         )}
       </div>
     </a>

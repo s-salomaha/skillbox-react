@@ -1,59 +1,36 @@
-import { useEffect, useState } from 'react';
-import axios from 'axios';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import {useDispatch, useSelector} from 'react-redux';
 import { RootState } from '../store/reducer';
+import { IPostData, postRequestAsync } from '../store/posts/actions';
 
-interface IPostData {
-  postID: string;
-  title: string;
-  thumbnail: string;
-  authorName: string;
-  karmaValue: number;
-  created_utc: number;
-  linkFlairText: string;
-  linkFlairBackgroundColor: string;
-  linkFlairTextColor: string;
-  selftext: string | null;
-  postHint: string;
-  imageUrl: string | null;
-  linkUrl: string | null;
-  url: string;
-}
-
-export function usePostsData() {
-  const [posts, setPosts] = useState<IPostData[]>([]);
+export function usePostsData(bottomOfListRef: React.RefObject<HTMLDivElement>) {
   const token = useSelector<RootState, any>(state => state.token);
+  const posts = useSelector<RootState, IPostData[]>(state => state.postsData.posts);
+  const postsCountLoads = useSelector<RootState, number>(state => state.postsData.countLoads);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    axios.get('https://oauth.reddit.com/best/', {
-      headers: { Authorization: `bearer ${token}` }
-    })
-      .then((resp) => {
-        if (resp.data.data) {
-          setPosts(resp.data.data.children.map((post: any) => ({
-            postID: post.data.id,
-            title: post.data.title,
-            thumbnail: getPostThumbnail(post.data.thumbnail),
-            authorName: post.data.author,
-            karmaValue: post.data.ups,
-            created_utc: post.data.created_utc,
-            linkFlairText: post.data.link_flair_text,
-            linkFlairBackgroundColor: post.data.link_flair_background_color,
-            linkFlairTextColor: post.data.link_flair_text_color === 'dark' ? '#333333' : '#fff',
-            selftext: post.data.selftext ? post.data.selftext : null,
-            postHint: post.data.post_hint,
-            imageUrl: post.data.post_hint === 'image' ? post.data.url_overridden_by_dest : null,
-            linkUrl: post.data.post_hint === 'link' ? post.data.url_overridden_by_dest : null,
-            url: post.data.url
-          })));
-        }
-      })
-      .catch(console.log);
-  }, [token]);
+    if (!token) return;
 
-  return [posts];
-}
+    const observer = new IntersectionObserver(entries => {
+      if (entries[0].isIntersecting) {
+        // @ts-ignore
+        dispatch(postRequestAsync());
+      }
+    }, {
+      rootMargin: '100px'
+    });
+    
+    if (bottomOfListRef.current) {
+      observer.observe(bottomOfListRef.current);
+    }
 
-function getPostThumbnail(thumbnail: string): string {
-  return thumbnail === 'self' ? 'https://via.placeholder.com/500x500.png?text=Reddit' : thumbnail;
+    return () => {
+      if (bottomOfListRef.current) {
+        observer.unobserve(bottomOfListRef.current);
+      }
+    }
+  }, [token, bottomOfListRef.current, postsCountLoads]);
+
+  return [ posts ];
 }

@@ -8,6 +8,15 @@ import {
   MeRequestSuccessAction
 } from './me/actions';
 import { meReducer, MeState } from './me/reducer';
+import {
+  POSTS_LOADING_ERROR,
+  POSTS_LOADING_ON,
+  POSTS_SET_POSTS_DATA,
+  PostsSetPostsDataAction,
+  PostsLoadingErrorAction,
+  PostsLoadingOnAction
+} from './posts/actions';
+import { postsReducer, PostsState } from './posts/reducer';
 import { ThunkAction } from 'redux-thunk';
 
 export type RootState = {
@@ -15,6 +24,7 @@ export type RootState = {
   onChange: (value: string) => void;
   token: string;
   me: MeState;
+  postsData: PostsState;
 }
 
 const initialState: RootState = {
@@ -25,6 +35,14 @@ const initialState: RootState = {
     loading: false,
     error: '',
     data: {}
+  },
+  postsData: {
+    loading: false,
+    error: '',
+    postsWereLoaded: false,
+    countLoads: 0,
+    nextAfter: '',
+    posts: []
   }
 };
 
@@ -63,7 +81,10 @@ type MyAction = UpdateCommentAction
   | SetTokenAction
   | MeRequestAction
   | MeRequestSuccessAction
-  | MeRequestErrorAction;
+  | MeRequestErrorAction
+  | PostsSetPostsDataAction
+  | PostsLoadingOnAction
+  | PostsLoadingErrorAction;
 
 export const rootReducer: Reducer<RootState, MyAction> = (state = initialState, action) => {
   switch (action.type) {
@@ -83,6 +104,13 @@ export const rootReducer: Reducer<RootState, MyAction> = (state = initialState, 
       return {
         ...state,
         me: meReducer(state.me, action)
+      };
+    case POSTS_SET_POSTS_DATA:
+    case POSTS_LOADING_ON:
+    case POSTS_LOADING_ERROR:
+      return {
+        ...state,
+        postsData: postsReducer(state.postsData, action)
       };
     default:
       return state;

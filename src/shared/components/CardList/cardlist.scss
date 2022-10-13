@@ -1,6 +1,38 @@
 @media all and (min-width: 1024px) {
-  .cardList {
+  .cardList:not(:empty) {
     padding-top: 20px;
     padding-bottom: 20px;
+  }
+}
+
+.notify {
+  display: flex;
+  justify-content: center;
+  padding: 30px;
+  font-size: 25px;
+  line-height: 1.15;
+}
+
+.buttonWrapper {
+  display: flex;
+  padding: 30px 0;
+}
+
+.button {
+  height: 50px;
+  padding: 0 50px;
+  background: #CC6633;
+  border-radius: 0 0 3px 3px;
+  font-weight: 500;
+  font-size: 14px;
+  color: #FFFFFF;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+
+  &:hover {
+    position: relative;
+    top: 1px;
   }
 }

@@ -4,7 +4,7 @@ import styles from './welcome.scss';
 export function Welcome() {
   return (
     <div className={styles.welcome}>
-      First log in
+      Log in first
     </div>
   );
 }

@@ -12,6 +12,7 @@ import { Provider } from 'react-redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { rootReducer } from './store/reducer';
 import thunk from 'redux-thunk';
+import { BrowserRouter } from 'react-router-dom';
 
 const store = createStore(rootReducer, composeWithDevTools(
   applyMiddleware(thunk)
@@ -21,12 +22,14 @@ function AppComponent() {
   return (
     <Provider store={store}>
       <UserContextProvider>
-        <Layout>
-          <Header />
-          <Content>
-            <CardList />
-          </Content>
-        </Layout>
+        <BrowserRouter>
+          <Layout>
+            <Header />
+            <Content>
+              <CardList />
+            </Content>
+          </Layout>
+        </BrowserRouter>
       </UserContextProvider>
     </Provider>
   );

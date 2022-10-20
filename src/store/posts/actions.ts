@@ -20,8 +20,12 @@ export interface IPostData {
   url: string;
 }
 
+export type PostsType = {
+  [key: string]: IPostData;
+}
+
 export interface IPostsData {
-  posts: IPostData[];
+  posts: PostsType;
   nextAfter: string;
 }
 
@@ -72,22 +76,25 @@ export const postRequestAsync = (): ThunkAction<
       });
 
       if (children) {
-        const posts = children.map((post: any) => ({
-          postID: post.data.id,
-          title: post.data.title,
-          thumbnail: getPostThumbnail(post.data.thumbnail),
-          authorName: post.data.author,
-          karmaValue: post.data.ups,
-          created_utc: post.data.created_utc,
-          linkFlairText: post.data.link_flair_text,
-          linkFlairBackgroundColor: post.data.link_flair_background_color,
-          linkFlairTextColor: post.data.link_flair_text_color === 'dark' ? '#333333' : '#fff',
-          selftext: post.data.selftext ? post.data.selftext : null,
-          postHint: post.data.post_hint,
-          imageUrl: post.data.post_hint === 'image' ? post.data.url_overridden_by_dest : null,
-          linkUrl: post.data.post_hint === 'link' ? post.data.url_overridden_by_dest : null,
-          url: post.data.url
-        }));
+        const posts = children.reduce(function(result: any, currentPost: any) {
+          result[currentPost.data.id] = {
+            postID: currentPost.data.id,
+            title: currentPost.data.title,
+            thumbnail: getPostThumbnail(currentPost.data.thumbnail),
+            authorName: currentPost.data.author,
+            karmaValue: currentPost.data.ups,
+            created_utc: currentPost.data.created_utc,
+            linkFlairText: currentPost.data.link_flair_text,
+            linkFlairBackgroundColor: currentPost.data.link_flair_background_color,
+            linkFlairTextColor: currentPost.data.link_flair_text_color === 'dark' ? '#333333' : '#fff',
+            selftext: currentPost.data.selftext ? currentPost.data.selftext : null,
+            postHint: currentPost.data.post_hint,
+            imageUrl: currentPost.data.post_hint === 'image' ? currentPost.data.url_overridden_by_dest : null,
+            linkUrl: currentPost.data.post_hint === 'link' ? currentPost.data.url_overridden_by_dest : null,
+            url: currentPost.data.url
+          };
+          return result;
+        }, {});
 
         dispatch(postsSetPostsData({
           posts,

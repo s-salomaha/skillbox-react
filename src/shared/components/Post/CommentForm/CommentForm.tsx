@@ -1,19 +1,20 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import styles from './commentform.scss';
 import { Comment } from './Comment';
 import { ControlledForm } from './ControlledForm';
-import { postContext } from '../../../context/postContext';
 import { usePostComments } from '../../../../hooks/usePostComments';
 import { Spinner } from '../../Spinner';
 
-export function CommentForm() {
-  const postData = useContext(postContext);
-  const postId = postData.postID;
-  const postComments = usePostComments();
+interface ICommentFormProps {
+  postID: string;
+}
+
+export function CommentForm({ postID }: ICommentFormProps) {
+  const postComments = usePostComments(postID);
 
   return (
     <>
-      <ControlledForm formId={postId}/>
+      <ControlledForm formId={postID}/>
 
       {!postComments.length && <Spinner />}
 

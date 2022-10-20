@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
-import {useDispatch, useSelector} from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../store/reducer';
-import { IPostData, postRequestAsync } from '../store/posts/actions';
+import { postRequestAsync, PostsType } from '../store/posts/actions';
 
 export function usePostsData(bottomOfListRef: React.RefObject<HTMLDivElement>) {
   const token = useSelector<RootState, any>(state => state.token);
-  const posts = useSelector<RootState, IPostData[]>(state => state.postsData.posts);
+  const posts = useSelector<RootState, PostsType>(state => state.postsData.posts);
   const postsCountLoads = useSelector<RootState, number>(state => state.postsData.countLoads);
   const dispatch = useDispatch();
 

@@ -42,7 +42,7 @@ const initialState: RootState = {
     postsWereLoaded: false,
     countLoads: 0,
     nextAfter: '',
-    posts: []
+    posts: {}
   }
 };
 

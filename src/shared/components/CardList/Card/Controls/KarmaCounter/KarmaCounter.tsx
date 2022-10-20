@@ -1,9 +1,13 @@
-import React, {useContext} from 'react';
+import React, { useContext } from 'react';
 import styles from './karmacounter.scss';
 import { postContext } from '../../../../../context/postContext';
 
-export function KarmaCounter() {
-  const karmaValue = useContext(postContext).karmaValue;
+interface IKarmaCounterProps {
+  value?: number | null;
+}
+
+export function KarmaCounter({ value = null }: IKarmaCounterProps) {
+  const karmaValue = value ? value : useContext(postContext).karmaValue;
 
   return (
     <div className={styles.karmaCounter}>

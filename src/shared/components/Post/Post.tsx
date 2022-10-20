@@ -1,32 +1,41 @@
-import React, { useContext, useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import ReactDOM from 'react-dom';
 import styles from './post.scss';
 import { CommentForm } from './CommentForm';
 import { KarmaCounter } from '../CardList/Card/Controls/KarmaCounter';
 import { UserLink } from '../UserLink';
-import { postContext } from '../../context/postContext';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../store/reducer';
+import { PostsType } from '../../../store/posts/actions';
 
-interface IPost {
-  onClose?: () => void;
-}
-
-export function Post(props: IPost) {
+export function Post() {
   const ref = useRef<HTMLDivElement>(null);
-  const postData = useContext(postContext);
-  const title = postData.title;
-  const authorName = postData.authorName;
-  const linkFlairText = postData.linkFlairText;
-  const linkFlairTextColor = postData.linkFlairTextColor;
-  const linkFlairBackgroundColor = postData.linkFlairBackgroundColor;
-  const selftext = postData.selftext;
-  const imageUrl = postData.imageUrl;
-  const linkUrl = postData.linkUrl;
-  const formattedDate = new Date(postData.created_utc * 1000).toLocaleString();
+  const { postID } = useParams();
+  const navigate = useNavigate();
+
+  const posts = useSelector<RootState, PostsType>(state => state.postsData.posts);
+  // @ts-ignore
+  const post = posts[postID];
+
+  if (!post) return null;
+
+  const postDataID = post.postID;
+  const title = post.title;
+  const authorName = post.authorName;
+  const linkFlairText = post.linkFlairText;
+  const linkFlairTextColor = post.linkFlairTextColor;
+  const linkFlairBackgroundColor = post.linkFlairBackgroundColor;
+  const selftext = post.selftext;
+  const imageUrl = post.imageUrl;
+  const linkUrl = post.linkUrl;
+  const karmaValue = post.karmaValue;
+  const formattedDate = new Date(post.created_utc * 1000).toLocaleString();
 
   useEffect(() => {
     function handleClick(event: MouseEvent) {
       if (event.target instanceof Node && !ref.current?.contains(event.target)) {
-        props.onClose?.();
+        navigate('/posts');
       }
     }
 
@@ -41,13 +50,13 @@ export function Post(props: IPost) {
   if (!node) return null;
 
   function closeModal() {
-    props.onClose?.();
+    navigate('/posts');
   }
 
   return ReactDOM.createPortal((
     <div className={styles.modal} ref={ref}>
       <div className={styles.modalHeader}>
-        <KarmaCounter />
+        <KarmaCounter value={karmaValue}/>
         <div className={styles.modalHeaderRight}>
           <h2 className={styles.modalTitle}>{title}</h2>
           <div className={styles.modalMetaData}>
@@ -80,7 +89,7 @@ export function Post(props: IPost) {
           {linkUrl && <a href={linkUrl} target="_blank">{linkUrl}</a>}
         </div>
 
-        <CommentForm />
+        <CommentForm postID={postDataID} />
       </div>
 
       <button className={styles.modalClose} type="button" onClick={closeModal}>

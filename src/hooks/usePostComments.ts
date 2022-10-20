@@ -1,13 +1,11 @@
-import {useContext, useEffect, useState} from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 import { RootState } from '../store/reducer';
-import { postContext } from '../shared/context/postContext';
 
-export function usePostComments() {
+export function usePostComments(postID: string) {
   const [comments, setComments] = useState<any[]>([]);
   const token = useSelector<RootState, any>(state => state.token);
-  const postID = useContext(postContext).postID;
 
   useEffect(() => {
     axios.get(`https://oauth.reddit.com/comments/${postID}`, {

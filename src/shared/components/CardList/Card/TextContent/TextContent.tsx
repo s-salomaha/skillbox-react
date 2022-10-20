@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import styles from './textcontent.scss';
 import { UserLink } from '../../../UserLink';
 import { postContext } from '../../../../context/postContext';
@@ -7,7 +7,7 @@ import { Title } from './Title';
 export function TextContent() {
   const postData = useContext(postContext);
   const title = postData.title;
-  const url = postData.url;
+  const postID = postData.postID;
   const authorName = postData.authorName;
   const formattedDate = new Date(postData.created_utc * 1000).toLocaleString();
 
@@ -21,7 +21,7 @@ export function TextContent() {
         </span>
       </div>
 
-      <Title url={url} title={title} />
+      <Title postID={postID} title={title} />
     </div>
   );
 }

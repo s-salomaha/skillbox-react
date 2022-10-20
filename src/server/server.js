@@ -8,12 +8,6 @@ const app = express();
 
 app.use('/static', express.static('./dist/client'));
 
-app.get('/', (req, res) => {
-  res.send(
-    indexTemplate(ReactDOM.renderToString(App()))
-  );
-});
-
 app.get('/auth', (req, res) => {
   // req.query.code;
   axios.post(
@@ -30,6 +24,12 @@ app.get('/auth', (req, res) => {
       );
     })
     .catch(console.log);
+});
+
+app.get('*', (req, res) => {
+  res.send(
+    indexTemplate(ReactDOM.renderToString(App()))
+  );
 });
 
 app.listen(3000, () => {

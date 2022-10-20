@@ -1,0 +1,11 @@
+.error404 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px;
+
+  &Text {
+    font-size: 25px;
+    line-height: 1.15;
+  }
+}

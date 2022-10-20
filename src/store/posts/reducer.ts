@@ -1,5 +1,5 @@
 import {
-  IPostData,
+  PostsType,
   POSTS_SET_POSTS_DATA,
   POSTS_LOADING_ON,
   POSTS_LOADING_ERROR,
@@ -15,7 +15,7 @@ export type PostsState = {
   postsWereLoaded: boolean;
   countLoads: number;
   nextAfter: string;
-  posts: IPostData[];
+  posts: PostsType;
 }
 
 type PostsActions = PostsSetPostsDataAction
@@ -27,7 +27,7 @@ export const postsReducer: Reducer<PostsState, PostsActions> = (state, action) =
     case POSTS_SET_POSTS_DATA:
       return {
         ...state,
-        posts: [...state.posts, ...action.postsData.posts],
+        posts: {...state.posts, ...action.postsData.posts},
         nextAfter: action.postsData.nextAfter,
         loading: false,
         postsWereLoaded: true,

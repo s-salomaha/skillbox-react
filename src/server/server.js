@@ -4,6 +4,8 @@ import { indexTemplate } from './indexTemplate';
 import { App } from '../App';
 import axios from 'axios';
 
+const PORT = process.env.PORT || 3000;
+
 const app = express();
 
 app.use('/static', express.static('./dist/client'));
@@ -32,6 +34,6 @@ app.get('*', (req, res) => {
   );
 });
 
-app.listen(3000, () => {
-  console.log('Server started on http://localhost:3000');
+app.listen(PORT, () => {
+  console.log(`Server started on http://localhost:${PORT}`);
 });

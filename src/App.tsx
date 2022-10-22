@@ -38,12 +38,11 @@ function AppComponent() {
               <Content>
                 <Routes>
                   <Route path='/auth' element={<Navigate to='/posts' replace={true} />} />
-                  <Route path='/posts/*' element={<CardList />} />
+                  <Route path='/posts' element={<CardList />} >
+                    <Route path=':postID' element={<Post />} />
+                  </Route>
                   <Route path='/' element={<Welcome />} />
                   <Route path='/*' element={<Error404 />} />
-                </Routes>
-                <Routes>
-                  <Route path='/posts/:postID' element={<Post />} />
                 </Routes>
               </Content>
             </Layout>

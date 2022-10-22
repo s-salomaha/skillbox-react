@@ -7,7 +7,7 @@ import { Spinner } from '../Spinner';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../store/reducer';
 import { postRequestAsync } from '../../../store/posts/actions';
-import { useNavigate } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 
 export function CardList() {
   const token = useSelector<RootState, string>(state => state.token);
@@ -58,6 +58,8 @@ export function CardList() {
       ) : (
         <div ref={bottomOfListRef} />
       )}
+
+      <Outlet />
     </>
   );
 }

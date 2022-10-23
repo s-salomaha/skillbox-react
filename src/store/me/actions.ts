@@ -42,10 +42,14 @@ export const meRequestAsync = (): ThunkAction<
     unknown,
     Action<string>
   > => (dispatch, getState) => {
+  const token = getState().token;
+
+  if (token === "undefined") return;
+
   dispatch(meRequest());
 
   axios.get('https://oauth.reddit.com/api/v1/me', {
-    headers: { Authorization: `bearer ${getState().token}` }
+    headers: { Authorization: `bearer ${token}` }
   })
     .then((resp) => {
       const userData = resp.data;

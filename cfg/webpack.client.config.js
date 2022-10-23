@@ -7,7 +7,10 @@ const IS_DEV = NODE_ENV === 'development';
 const IS_PROD = NODE_ENV === 'production';
 const GLOBAL_SCSS_REGEXP = /\.global\.s[ac]ss$/;
 const DEV_PLUGINS = [ new CleanWebpackPlugin(), new HotModuleReplacementPlugin() ];
-const COMMON_PLUGINS = [ new DefinePlugin({ 'process.env.CLIENT_ID': `'${process.env.CLIENT_ID}'` }) ];
+const COMMON_PLUGINS = [ new DefinePlugin({
+  'process.env.CLIENT_ID': `'${process.env.CLIENT_ID}'`,
+  'process.env.APP_URL': `'${process.env.APP_URL}'`
+}) ];
 
 function setupDevtool() {
   if (IS_DEV) return 'eval';

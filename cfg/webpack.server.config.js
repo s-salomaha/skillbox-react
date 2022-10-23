@@ -51,5 +51,8 @@ module.exports = {
     minimize: false
   },
   devtool: IS_DEV ? 'eval' : false,
-  plugins: [ new DefinePlugin({ 'process.env.CLIENT_ID': `'${process.env.CLIENT_ID}'` }) ]
+  plugins: [ new DefinePlugin({
+    'process.env.CLIENT_ID': `'${process.env.CLIENT_ID}'`,
+    'process.env.APP_URL': `'${process.env.APP_URL}'`
+  }) ]
 };

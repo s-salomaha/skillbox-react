@@ -12,9 +12,7 @@ const app = express();
 
 if (!IS_DEV) {
   app.use(compression());
-  app.use(helmet({
-    contentSecurityPolicy: false
-  }));
+  app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
 }
 
 app.use('/static', express.static('./dist/client'));

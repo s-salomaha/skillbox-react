@@ -8,7 +8,7 @@
   "main": "index.js",
   "scripts": {
     "build:dev": "env NODE_ENV=development webpack --config webpack.config.js",
-    "build": "env NODE_ENV=production webpack --config webpack.config.js",
+    "build": "env NODE_ENV=production CLIENT_ID=K-iRA6Hag31MhrGRS4aD5g SECRET=R_naYfRAWMueww864tmbBVVDTokfUQ APP_URL=https://skillbox-react-app-s.herokuapp.com webpack --config webpack.config.js",
     "dev": "env NODE_ENV=development CLIENT_ID=N8jwWE6HseMzW185xWbPfw SECRET=S_3587Zc3tMWS3_bXIHAulfDmVOc3g APP_URL=http://localhost:3000 node ./bin/dev.js",
     "test": "jest",
     "start": "env CLIENT_ID=K-iRA6Hag31MhrGRS4aD5g SECRET=R_naYfRAWMueww864tmbBVVDTokfUQ APP_URL=https://skillbox-react-app-s.herokuapp.com node ./dist/server/server.js"

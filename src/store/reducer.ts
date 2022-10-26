@@ -20,7 +20,6 @@ import { postsReducer, PostsState } from './posts/reducer';
 import { ThunkAction } from 'redux-thunk';
 
 export type RootState = {
-  commentValues: any;
   onChange: (value: string) => void;
   token: string;
   me: MeState;
@@ -28,7 +27,6 @@ export type RootState = {
 }
 
 const initialState: RootState = {
-  commentValues: {},
   onChange: () => {},
   token: '',
   me: {
@@ -45,16 +43,6 @@ const initialState: RootState = {
     posts: {}
   }
 };
-
-const UPDATE_COMMENT = 'UPDATE_COMMENT';
-export type UpdateCommentAction = {
-  type: typeof UPDATE_COMMENT;
-  commentValues: any;
-}
-export const updateComment: ActionCreator<UpdateCommentAction> = (commentValues) => ({
-  type: UPDATE_COMMENT,
-  commentValues
-});
 
 const SET_TOKEN = 'SET_TOKEN';
 export type SetTokenAction = {
@@ -77,8 +65,7 @@ export const saveToken = (): ThunkAction<
   }
 }
 
-type MyAction = UpdateCommentAction
-  | SetTokenAction
+type MyAction = SetTokenAction
   | MeRequestAction
   | MeRequestSuccessAction
   | MeRequestErrorAction
@@ -88,11 +75,6 @@ type MyAction = UpdateCommentAction
 
 export const rootReducer: Reducer<RootState, MyAction> = (state = initialState, action) => {
   switch (action.type) {
-    case UPDATE_COMMENT:
-      return {
-        ...state,
-        commentValues: action.commentValues
-      };
     case SET_TOKEN:
       return {
         ...state,

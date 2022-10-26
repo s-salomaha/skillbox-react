@@ -1,7 +1,22 @@
 import React, { ChangeEvent } from 'react';
 import { Form } from '../Form';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState, updateComment } from '../../../../../store/reducer';
+import create from 'zustand';
+
+type CommentValuesDataType = {
+  [key: string]: string;
+}
+
+interface CommentValuesState {
+  commentValuesData: CommentValuesDataType;
+  changeCommentValues: (event: ChangeEvent<HTMLTextAreaElement>, formId: string) => void;
+}
+
+const useCommentValuesStore = create<CommentValuesState>((set) => ({
+  commentValuesData: {},
+  changeCommentValues: (event, formId) => set((state) => ({
+    commentValuesData: { ...state.commentValuesData, [formId]: event.target.value }
+  }))
+}));
 
 interface IControlledFormProps {
   authorName?: string;
@@ -10,19 +25,12 @@ interface IControlledFormProps {
 }
 
 export function ControlledForm({ authorName = '', setFocusOnField = false, formId }: IControlledFormProps) {
-  const commentValueData = useSelector<RootState, any>(state => state.commentValues);
-  const dispatch = useDispatch();
+  const { commentValuesData, changeCommentValues }: CommentValuesState = useCommentValuesStore();
+  const commentValue: string = getCommentValue(commentValuesData);
 
-  const commentValue: string = getCommentValue(commentValueData);
-
-  function getCommentValue(commentValueObjext: any) {
+  function getCommentValue(commentValueObjext: CommentValuesDataType) {
     if (commentValueObjext && commentValueObjext[formId]) return commentValueObjext[formId];
     return '';
-  }
-
-  function handleChange(event: ChangeEvent<HTMLTextAreaElement>) {
-    const newCommentValueData = { ...commentValueData, [formId]: event.target.value };
-    dispatch(updateComment(newCommentValueData));
   }
 
   function getTextareaValue() {
@@ -34,7 +42,7 @@ export function ControlledForm({ authorName = '', setFocusOnField = false, formI
       textareaTagProps={{
         value: getTextareaValue()
       }}
-      handleChange={handleChange}
+      handleChange={(event: ChangeEvent<HTMLTextAreaElement>) => changeCommentValues(event, formId)}
       setFocusOnField={setFocusOnField}
     />
   );
